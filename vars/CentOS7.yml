@@ -1,0 +1,8 @@
+---
+
+mysqld:
+  server_cnf_dest: /etc/my.cnf.d/server.cnf
+  daemon_name: mariadb
+  package: mariadb-server
+  additional_packages:
+    - MySQL-python

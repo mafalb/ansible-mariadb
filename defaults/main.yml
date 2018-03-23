@@ -1,0 +1,8 @@
+---
+
+mysql:
+  manage_package: false
+  manage_storage: false
+  manage_security: false
+  manage_service: true
+  firewalld: false

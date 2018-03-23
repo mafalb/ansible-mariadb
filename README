@@ -1,0 +1,35 @@
+---
+
+dependencies:
+  - fs
+
+usage:
+
+---
+
+- hosts: mariadb
+  vars_files:
+    - vars/mysqld.yml
+
+  roles:
+
+    - role: fs
+      fs_mountpoint: /var/lib/mysql
+      fs_vg_name: "{{ ansible_lvm.vgs.keys()[0] }}"
+      fs_lv_name: mysql
+      fs_size: 20g
+      fs_fstype: xfs
+      fs_mountoptions: defaults,nodev,nosuid,noexec
+
+    - role: fs
+      fs_mountpoint: /var/log/mysql
+      fs_vg_name: "{{ ansible_lvm.vgs.keys()[0] }}"
+      fs_lv_name: mysql_log
+      fs_size: 10g
+      fs_fstype: xfs
+      fs_mountoptions: defaults,nodev,nosuid,noexec
+
+    - role: mariadb
+      server_cnf_template: mysql/{{ ansible_hostname }}/server.cnf
+      firewalld: true
+

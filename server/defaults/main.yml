@@ -1,8 +1,0 @@
----
-
-manage_package: yes
-manage_storage: no
-manage_security: false
-manage_service: yes
-package: mariadb-server
-daemon_name: mariadb

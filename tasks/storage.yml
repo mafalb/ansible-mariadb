@@ -1,16 +1,17 @@
 ---
 
-- name: create logical volume for mysql_data
-  lvol:
-    lv: mysql_data
-    vg: "{{fs_vg_name|default('lvm.'+inventory_hostname)}}"
-    size: 1g
-    shrink: no
+- name: create filesystem for mysql_data
+  include_role:
+    - name: fs
+      fs_mountpoint: /var/lib/mysql
+      fs_vg_name: "{{ ansible_lvm.vgs.keys()[0] }}"
+      fs_lv_name: mysql
+      fs_size: 20g
+      fs_fstype: xfs
+      fs_mountoptions: defaults,nodev,nosuid
 
-- name: filesystem for mysql data exists
-  filesystem:
-    dev: /dev/{{fs_vg_name|default('lvm.'+inventory_hostname)}}/mysql_data
-    fstype: xfs
+- name: create filesystem for mysql_logs
+
 
 - name: mount point for /var/lib/mysql exists
   file:

@@ -1,0 +1,26 @@
+---
+
+- name: test db does not exist
+  mysql_db:
+    name: test
+    state: absent
+  when: not (ansible_check_mode and packages.changed)
+
+- name: anonymous user does not exist
+  mysql_user:
+    name: ''
+    host_all: yes
+    state: absent
+  when: not (ansible_check_mode and packages.changed)
+
+- name: password for root is set
+  mysql_user:
+    name: root
+    password: "{{ mysqld.pwd.root }}"
+
+- name: .my.cnf for root
+  template:
+    src: root.cnf
+    dest: /root/.my.cnf
+    backup: no
+    mode: 00600

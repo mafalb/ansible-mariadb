@@ -1,7 +1,0 @@
----
-
-- name: restart mysql
-  service:
-    name: "{{ daemon_name }}"
-    state: restarted
-  when: manage_service
