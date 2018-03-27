@@ -1,0 +1,5 @@
+# Molecule managed
+
+FROM mafalb.at/centos/systemd
+
+RUN yum install python sudo bash libselinux-python

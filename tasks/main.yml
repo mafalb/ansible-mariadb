@@ -3,18 +3,11 @@
 - name: include OS specific variables
   include_vars: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
 
-- name: storage is managed, i.e. lvm, filesystems
-  include_role:
-    name: mariadb
-    tasks_from: storage
-  when: false
-#  when: mysqld.manage_storage
-
 - name: mysql server is installed
   package:
     name: "{{ mysqld.package }}"
     state: present
-  
+
 - name: additional packages are installed (make ansible happy)
   with_items: "{{ mysqld.additional_packages }}"
   package:
@@ -36,11 +29,14 @@
     - server.cnf
   notify: restart mysql
 
+- debug: var=mysqld
+
 - name: mysql daemon is running
   service:
     name: "{{ mysqld.daemon_name }}"
     state: started
-    enabled: yes
+    enabled: true
+    use: systemd
   register: mysql_is_running
 
 - name: installation is secured

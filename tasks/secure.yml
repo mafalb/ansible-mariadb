@@ -9,7 +9,7 @@
 - name: anonymous user does not exist
   mysql_user:
     name: ''
-    host_all: yes
+    host_all: true
     state: absent
   when: not (ansible_check_mode and packages.changed)
 
@@ -22,5 +22,5 @@
   template:
     src: root.cnf
     dest: /root/.my.cnf
-    backup: no
+    backup: false
     mode: 00600
