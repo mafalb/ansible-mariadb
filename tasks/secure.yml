@@ -13,10 +13,18 @@
     state: absent
   when: not (ansible_check_mode and packages.changed)
 
+- name: check if .my.cnf exists
+  stat:
+    path: /root/.my.cnf
+  register: mariadb.__root_cnf
+
 - name: password for root is set
+  with_items:
+    - localhost
   mysql_user:
     name: root
-    password: "{{ mysqld.pwd.root }}"
+    host: "{{ item }}"
+    password: "{{ lookup('password', '/tmp/.my.root.passwordfile') }}"
 
 - name: .my.cnf for root
   template:
@@ -24,3 +32,13 @@
     dest: /root/.my.cnf
     backup: false
     mode: 00600
+
+- name: password for root is set
+  with_items:
+    - "{{ ansible_hostname }}"
+    - 127.0.0.1
+    - ::1
+  mysql_user:
+    name: root
+    host: "{{ item }}"
+    password: "{{ lookup('password', '/tmp/.my.root.passwordfile') }}"

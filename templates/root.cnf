@@ -1,4 +1,4 @@
 [client]
 user = root
-password = "{{ mysqld.pwd.root }}"
+password = "{{ lookup('password', '/tmp/.my.root.passwordfile') }}"
 

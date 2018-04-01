@@ -1,0 +1,4 @@
+*.swp
+molecule/default/.molecule/
+molecule/*/.pytest_cache/
+molecule/*/tests/__pycache__/

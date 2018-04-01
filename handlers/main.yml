@@ -4,4 +4,4 @@
   service:
     name: "{{ mysqld.daemon_name }}"
     state: restarted
-  when: mysqld.manage_service
+  when: mysql.manage_service

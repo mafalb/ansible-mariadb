@@ -34,7 +34,7 @@ passed in as parameters) is always nice for users too:
 
     - hosts: servers
       roles:
-         - { role: a-mariadb, x: 42 }
+         - { role: mariadb, x: 42 }
 
 License
 -------

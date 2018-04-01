@@ -45,6 +45,7 @@
     tasks_from: secure
 
 - name: firewalld has mysql port open
+  when: mysql.firewalld
   firewalld:
     immediate: true
     permanent: true
