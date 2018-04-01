@@ -1,7 +1,7 @@
-Role Name
+mariadb
 =========
 
-A brief description of the role goes here.
+Install and run mariadb server
 
 Requirements
 ------------
@@ -19,6 +19,13 @@ that can/should be set via parameters to the role. Any variables that are read
 from other roles and/or the global scope (ie. hostvars, group vars, etc.) should
 be mentioned here as well.
 
+  mysql:
+    manage_package: false
+    manage_storage: false
+    manage_security: false
+    manage_service: true
+    firewalld: false
+
 Dependencies
 ------------
 
@@ -29,12 +36,9 @@ are used from other roles.
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables
-passed in as parameters) is always nice for users too:
-
-    - hosts: servers
+    - hosts: all
       roles:
-         - { role: mariadb, x: 42 }
+        - role: mariadb
 
 License
 -------
@@ -44,5 +48,4 @@ GPLv3
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a
-website (HTML is not allowed).
+mailto: markus.falb@mafalb.at
