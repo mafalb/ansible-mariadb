@@ -39,7 +39,7 @@ passed in as parameters) is always nice for users too:
 License
 -------
 
-BSD
+GPLv3
 
 Author Information
 ------------------
